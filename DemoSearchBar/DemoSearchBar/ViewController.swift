@@ -24,6 +24,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         // Do any additional setup after loading the view, typically from a nib.
         setupArrayAnimal()
         setupSearchBar()
+        searchBarLayout()
     }
     
     private func setupArrayAnimal(){
@@ -44,7 +45,16 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         searchBar.delegate = self
     }
     
+    private func searchBarLayout(){
+        tableView.tableHeaderView = UIView()
+//        tableView.estimatedSectionHeaderHeight = 50
+     //  navigationItem.titleView = searchBar
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: searchBar)
+        searchBar.showsScopeBar = false
+    }
+    
     // MARK: - Tablview
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentAnimalArray.count
     }
@@ -52,6 +62,13 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+    
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        return searchBar
+//    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//            return UITableView.automaticDimension
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? TableViewCell else {
